@@ -1,0 +1,374 @@
+:root {
+    --bg-dark: #0a0a0a;
+    --panel-bg: rgba(26, 26, 26, 0.6);
+    --panel-border: rgba(255, 255, 255, 0.08);
+    --primary: #39c94e;
+    --primary-glow: rgba(57, 201, 78, 0.3);
+    --text-main: #ffffff;
+    --text-muted: #888;
+    --radius: 24px;
+    --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+@font-face {
+    font-family: 'Minecraft';
+    src: url('../fonts/minecraft.woff2') format('woff2');
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    cursor: url('../cursors/default.svg') 12 12, auto;
+}
+
+body {
+    background-color: var(--bg-dark);
+    background-image: radial-gradient(circle at 50% 0%, #1a2a1d 0%, var(--bg-dark) 60%);
+    color: var(--text-main);
+    font-family: var(--font-stack);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+a,
+button {
+    cursor: url('../cursors/pointer.svg') 12 12, pointer;
+}
+
+.main-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 10;
+}
+
+@media (max-width: 850px) {
+    .main-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.glass-panel {
+    background: var(--panel-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.profile-card {
+    position: sticky;
+    top: 40px;
+    height: fit-content;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-card h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-family: monospace;
+    margin-top: 5px;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(57, 201, 78, 0.1);
+    color: var(--primary);
+    padding: 6px 16px;
+    border-radius: 99px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 15px;
+    border: 1px solid var(--primary-glow);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--primary);
+    animation: pulse 2s infinite;
+}
+
+.content-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.icon-box {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-box img {
+    width: 24px;
+    height: 24px;
+    opacity: 0.9;
+    filter: invert(100%);
+}
+
+.link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.link-item {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.link-item:hover:not(.disabled) {
+    background: rgba(57, 201, 78, 0.1);
+    border-color: var(--primary);
+    transform: translateY(-3px);
+}
+
+.link-title {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.link-meta {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+.link-item.highlight {
+    border-color: var(--primary);
+    background: rgba(57, 201, 78, 0.05);
+}
+
+.link-item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.project-list {
+    list-style: none;
+}
+
+.project-list li {
+    padding: 15px 0;
+    border-bottom: 1px solid var(--panel-border);
+}
+
+.project-list li:last-child {
+    border-bottom: none;
+}
+
+.project-list a {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.project-list a:hover {
+    text-decoration: underline;
+}
+
+.project-list p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.btn-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.btn.primary {
+    background: var(--primary);
+    color: #000;
+}
+
+.btn.primary:hover {
+    background: #2ed646;
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+
+.btn.outline {
+    border: 2px solid var(--primary);
+    color: var(--primary);
+}
+
+.btn.outline:hover {
+    background: var(--primary);
+    color: #000;
+}
+
+.mc-btn {
+    background: #333;
+    border: 2px solid #555;
+    border-bottom: 4px solid #555;
+    color: white;
+    width: 100%;
+    padding: 12px;
+    border-radius: 4px;
+    font-family: 'Minecraft', var(--font-stack);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    transition: transform 0.1s;
+}
+
+.mc-btn:active {
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+}
+
+.icon-sm {
+    width: 24px;
+    height: 24px;
+    image-rendering: pixelated;
+}
+
+.footer-note {
+    margin-top: auto;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+#fx-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+    overflow: hidden;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+
+@keyframes launch {
+    0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-12.45vh) scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes spark {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+    }
+}
+
+.snowball {
+    position: absolute;
+    top: -50px;
+    width: 32px;
+    height: 32px;
+    background-image: url('../../assets/minecraft-items/snowball.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    opacity: 0.7;
+}
+
+.rocket {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    background-image: url('../../assets/minecraft-items/firework_rocket.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    z-index: 100;
+}
+
+.spark {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: white;
+    box-shadow: 0 0 10px white;
+    border-radius: 50%;
+    pointer-events: none;
+}
