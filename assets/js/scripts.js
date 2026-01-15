@@ -28,24 +28,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setInterval(createSnowball, 800);
 
-    function launchFirework() {
-        const rocket = document.createElement("div");
-        rocket.classList.add("rocket");
+    function launchFirework(amount = 1) {
+        const count = Math.max(1, Math.floor(amount));
 
-        const launchX = 20 + Math.random() * 60;
-        rocket.style.left = `${launchX}vw`;
-        rocket.style.bottom = "-50px";
+        for (let i = 0; i < count; i++) {
+            const rocket = document.createElement('div');
+            rocket.classList.add('rocket');
 
-        rocket.style.animation = "launch 1.5s ease-out forwards";
-        rocket.style.zIndex = 1000000;
+            const launchX = 20 + Math.random() * 60;
+            rocket.style.left = `${launchX}vw`;
+            rocket.style.bottom = '-50px';
 
-        fxLayer.appendChild(rocket);
+            const randomHeight = Math.floor(Math.random() * (35 - 7 + 1)) + 7;
+            rocket.style.setProperty('--launch-height', randomHeight);
 
-        setTimeout(() => {
+            const duration = randomHeight * 0.05;
+            rocket.style.animation = `launch ${duration}s ease-out forwards`;
+
+            fxLayer.appendChild(rocket);
+
+            setTimeout(() => {
             const rect = rocket.getBoundingClientRect();
             createExplosion(rect.left + rect.width / 2, rect.top);
             rocket.remove();
-        }, 1500);
+            }, 1500);
+        }
     }
 
     function createExplosion(x, y) {
@@ -79,7 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
         fireworkBtn.addEventListener("click", (e) => {
             e.target.style.transform = "scale(0.95)";
             setTimeout(() => (e.target.style.transform = ""), 100);
-            launchFirework();
+            launchFirework(Math.round(Math.random() * 2.5));
+            //launchFirework(20);
         });
     }
 });
